@@ -3,7 +3,9 @@ package com.dailycodebuffer.ProductService.Controller;
 import com.dailycodebuffer.ProductService.DTO.ProductDTO;
 import com.dailycodebuffer.ProductService.Modal.Product;
 import com.dailycodebuffer.ProductService.Service.ProductService;
+import com.dailycodebuffer.ProductService.Service.ProductServiceImpl;
 import com.dailycodebuffer.ProductService.Utils.ProductMapper;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,28 +13,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("product")
+@Log4j2
 public class ProductController
 {
     @Autowired
-    ProductService productService;
+    ProductServiceImpl productServiceImpl;
     @Autowired
     ProductMapper productMapper;
 
-    @PostMapping("/product")
+    @PostMapping("product")
     Product craeteProduct(@RequestBody Product product)
     {
-        return productService.createProduct(product);
+        return productServiceImpl.createProduct(product);
     }
-    @GetMapping("/product/{id}")
+    @GetMapping("{id}")
     Product getProductById(@PathVariable int id)
     {
-          return productService.getById(id).get();
+          return productServiceImpl.getById(id).get();
     }
 
-    @GetMapping("/products")
+    @GetMapping("products")
     List<ProductDTO> getAllProducts()
     {
-         return productService.getAllProducts();
+        log.info("Getting all products ");
+        return productServiceImpl.getAllProducts();
     }
 
     @GetMapping("/product-search/{str}")
@@ -40,7 +45,7 @@ public class ProductController
     {
         List<ProductDTO> productsDTO = new ArrayList<ProductDTO>();
         List<Product> products = new ArrayList<Product>();
-        products =  productService.getProductsSearch(str);
+        products =  productServiceImpl.getProductsSearch(str);
         for(Product p:products)
         {
             productsDTO.add(productMapper.fromEntity(p));
@@ -50,6 +55,6 @@ public class ProductController
     @PutMapping("/reduce-quantity/{id}")
     public void reduceQuantity(@PathVariable int id,@RequestParam int quant)
     {
-        productService.reduceQuantity(id,quant);
+        productServiceImpl.reduceQuantity(id,quant);
     }
 }

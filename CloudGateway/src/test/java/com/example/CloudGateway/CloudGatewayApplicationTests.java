@@ -1,4 +1,4 @@
-package com.dailycodebuffer.CloudGateway;
+package com.example.CloudGateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

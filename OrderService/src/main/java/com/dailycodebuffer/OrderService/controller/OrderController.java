@@ -11,29 +11,30 @@ import java.util.List;
 
 @Log4j2
 @RestController
+@RequestMapping("/order")
 public class OrderController
 {
        @Autowired
        OrderService orderService;
-       @PostMapping("order")
+       @PostMapping("post")
        public Orderdto createOrder(@RequestBody Orderdto orderdto)
        {
            log.info("creating Order {}",orderdto);
            return orderService.createOrder(orderdto);
        }
-       @GetMapping("orders")
+       @GetMapping("/get")
        public List<Orderdto> getAllOrders()
        {
            return orderService.getAllOrder();
        }
 
-       @GetMapping("order/{id}")
+       @GetMapping("{id}")
        public OrderResponse getOrderById(@PathVariable int id)
        {
            log.info("Inside the rest call");
            return orderService.getOrder(id);
        }
-       @DeleteMapping("order/{id}")
+       @DeleteMapping("{id}")
        public void deleteBYId(@PathVariable int id)
        {
             orderService.deleteOrder(id);

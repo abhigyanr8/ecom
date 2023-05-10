@@ -5,6 +5,7 @@ import com.dailycodebuffer.ProductService.Modal.Product;
 import com.dailycodebuffer.ProductService.Repo.ProductRepo;
 import com.dailycodebuffer.ProductService.Utils.ProductMapper;
 import jakarta.ws.rs.NotFoundException;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class ProductServiceImpl implements ProductService
 {
     @Autowired
@@ -24,10 +26,13 @@ public class ProductServiceImpl implements ProductService
     public List<ProductDTO> getAllProducts()
     {
          List<Product> products = new ArrayList<Product>();
+         products = (List<Product>) productrepo.findAll();
+
          List<ProductDTO> productsDTO = new ArrayList<ProductDTO>();
 
          for(Product p:products)
          {
+                log.info("Getting data of {}",productMapper.fromEntity(p));
                 productsDTO.add(productMapper.fromEntity(p));
          }
          return productsDTO;

@@ -10,18 +10,19 @@ import java.util.UUID;
 
 
 @RestController
+@RequestMapping("payment")
 public class PaymentController
 {
     @Autowired
     PaymentService paymentService;
-    @PostMapping("payment")
+    @PostMapping("post")
     void createpayment(@RequestBody Paymentdto paymentdto)
     {
         UUID uuid = UUID.randomUUID();
         Payment payment = new Payment(paymentdto.getId(),paymentdto.getProductId(),paymentdto.getOrderId(),paymentdto.getPaymentType(),paymentdto.getAmount(),uuid);
         paymentService.createPayment(payment);
     }
-    @GetMapping("payment/{productId}")
+    @GetMapping("{productId}")
     Payment getPayment(@PathVariable int productId)
     {
          return paymentService.getPayment(productId);
