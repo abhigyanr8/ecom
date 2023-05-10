@@ -1,19 +1,23 @@
 server:
- port:9095
+  port: 9095
 
-spring:
-  application:
-    name:CLOUDGATEWAY
+Spring:
+  Application:
+    name: APIGATEWAY
   config:
-    import:configserver:http://localhost:9093
+    import: configserver:http://localhost:9093/
   cloud:
     gateway:
       routes:
-         predicates:
-           -path=/**
-         id:
-           ORDERSERVICE
-         uri:
-           lb://ORDERSERVICE
-
-
+        - id: ORDERSERVICE
+          uri: lb://ORDERSERVICE
+          predicates:
+            - Path=/order/**
+        - id: PRODUCTSERVICE
+          uri: lb://PRODUCTSERVICE
+          predicates:
+            - Path=/product/**
+        - id: PAYMENTSERVICE
+          uri: lb://PAYMENTSERVICE
+          predicates:
+            - Path=/payment/**

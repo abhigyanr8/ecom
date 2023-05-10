@@ -1,4 +1,4 @@
-package com.dailycodebuffer.CloudGateway;
+package com.example.CloudGateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

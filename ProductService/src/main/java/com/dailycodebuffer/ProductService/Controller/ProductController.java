@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("product")
 public class ProductController
 {
     @Autowired
@@ -18,18 +19,18 @@ public class ProductController
     @Autowired
     ProductMapper productMapper;
 
-    @PostMapping("/product")
+    @PostMapping("product")
     Product craeteProduct(@RequestBody Product product)
     {
         return productService.createProduct(product);
     }
-    @GetMapping("/product/{id}")
+    @GetMapping("{id}")
     Product getProductById(@PathVariable int id)
     {
           return productService.getById(id).get();
     }
 
-    @GetMapping("/products")
+    @GetMapping("products")
     List<ProductDTO> getAllProducts()
     {
          return productService.getAllProducts();
