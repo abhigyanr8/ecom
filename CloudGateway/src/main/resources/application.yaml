@@ -1,0 +1,19 @@
+server:
+ port:9095
+
+spring:
+  application:
+    name:CLOUDGATEWAY
+  config:
+    import:configserver:http://localhost:9093
+  cloud:
+    gateway:
+      routes:
+         predicates:
+           -path=/**
+         id:
+           ORDERSERVICE
+         uri:
+           lb://ORDERSERVICE
+
+
