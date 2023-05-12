@@ -14,7 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("product")
+<<<<<<< HEAD
 @Log4j2
+=======
+>>>>>>> 7d44abbe5cd04b723913c1daab3db09d564a4a2c
 public class ProductController
 {
     @Autowired
