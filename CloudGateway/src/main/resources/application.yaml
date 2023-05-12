@@ -20,7 +20,6 @@ Spring:
         - id: PAYMENTSERVICE
           uri: lb://PAYMENTSERVICE
           predicates:
-<<<<<<< HEAD
             - Path=/payment/**
 okta:
   oauth2:
@@ -29,6 +28,4 @@ okta:
     client-id: 0oa9haixctfhdiY8M5d7
     client-secret: zjc_vDxXgHVLKxyTwRKtzBprzgUtdfvJLGUTdxHZ
     scopes: openid,profile,email,offline_access
-=======
-            - Path=/payment/**
->>>>>>> 7d44abbe5cd04b723913c1daab3db09d564a4a2c
+
