@@ -6,7 +6,6 @@ import com.dailycodebuffer.ProductService.Service.ProductService;
 import com.dailycodebuffer.ProductService.Utils.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class ProductController
     @Autowired
     ProductMapper productMapper;
 
-    @PostMapping("product")
+    @PostMapping("")
     Product craeteProduct(@RequestBody Product product)
     {
         return productService.createProduct(product);
@@ -30,7 +29,7 @@ public class ProductController
           return productService.getById(id).get();
     }
 
-    @GetMapping("products")
+    @GetMapping("")
     List<ProductDTO> getAllProducts()
     {
          return productService.getAllProducts();
