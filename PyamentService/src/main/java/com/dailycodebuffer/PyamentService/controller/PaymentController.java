@@ -15,7 +15,7 @@ public class PaymentController
 {
     @Autowired
     PaymentService paymentService;
-    @PostMapping("")
+    @PostMapping("post")
     void createpayment(@RequestBody Paymentdto paymentdto)
     {
         UUID uuid = UUID.randomUUID();
