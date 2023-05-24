@@ -1,0 +1,22 @@
+version: "3"
+services:
+  serviceregistry:
+    image: 'serviceregistry:1.0'
+    container_name: serviceregistry
+    ports:
+      - '8761:8761'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://serviceregistry:8761/eureka"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  configserver:
+    image: 'configserver:1.0'
+    container_name: configserver
+    ports:
+     - '9093:9093'
+    environment:
+     - EUREKA_SERVER_ADDRESS = http://host.docker.internal:8761/eureka
+    depends_on:
+       serviceregistry:
+         condition: service_healthy
