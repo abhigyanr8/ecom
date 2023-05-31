@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-server-app
+spec:
+  selector:
+    matchLabels:
+      app: config-server-app
+  template:
+    metadata:
+      labels:
+        app: config-server-app
+    spec:
+      containers:
+      - name: config-server-app
+        image: abhigyanr8/configserver:2.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9093
+        env:
+          - name: EUREKA_SERVER_ADDRESS
+            valueFrom:
+              configMapKeyRef:
+                key: eureka_server_address
+                name: eureka-cm
+             
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-service-svc 
+spec:
+  selector:
+    app: configserver-app
+  ports:
+  - port: 80
+    targetPort: 9093

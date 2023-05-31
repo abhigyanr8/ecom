@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serviceregistry
+spec:
+  selector:
+    matchLabels:
+       app: serviceregistry
+  template:
+    metadata:
+      labels:
+        app: serviceregistry
+    spec:
+      containers:
+        - name: serviceregistry
+          image: abhigyanr8/serviceregistry:0.0.1
+          imagePullPolicy: Always
+          ports: 
+            - containerPort: 8761
+  
